@@ -77,14 +77,10 @@ def main():
         y = np.array(y)
         y = y.reshape(32561, 1)
         y_plus = y
-        if i > 0:
-            y_plus *= landa
         last_y += y_plus
         landa = acc(train_y, last_y)
         print('iter : %d acc : %f' %(i, landa))
         p_y = regr.predict(test_x)
-        if i > 0:
-            p_y *= landa
         result += p_y
         y = train_y - last_y
 

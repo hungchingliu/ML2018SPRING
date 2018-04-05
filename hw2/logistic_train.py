@@ -92,7 +92,7 @@ def main():
     w_zero = w
 
     l_rate = 10
-    times = 100000
+    times = 500000
     w = w_zero
     x_tr = train_x.transpose()
 
