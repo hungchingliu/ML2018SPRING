@@ -19,7 +19,7 @@ def main():
     y = Average()(outputs)
     model_ensemble = Model(inputs=model_input, outputs=y)
     model_ensemble.summary()
-    model_ensemble.save("Ens_2.h5py")
+    model_ensemble.save("Ens_1.h5py")
 
 if __name__ == "__main__":
     main()

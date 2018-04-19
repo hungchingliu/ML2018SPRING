@@ -3,12 +3,13 @@ import numpy as np
 import csv
 import keras
 from keras.models import load_model
+import sys
 
-
-
+in_path = sys.argv[1]
+out_path = sys.argv[2]
 
 def load_data():
-    with open('dataset/test.csv', 'r') as csvfile:
+    with open(in_path, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter = ',')
         test_x = []
         iter = 0
@@ -30,13 +31,13 @@ def load_data():
 def main():
     test_x = load_data()
     test_x = test_x.reshape(-1, 48, 48, 1)
-    model = load_model('modelEns.h5py')
+    model = load_model('Ens_1.h5py')
     model.summary()
     test_y = model.predict(test_x)
     test_y = np.argmax(test_y, axis=1)
     print(test_y)
 
-    with open('out.csv', 'w') as file:
+    with open(out_path, 'w') as file:
         writer = csv.writer(file, delimiter=',')
         writer.writerow(['id', 'label'])
         for i in range(len(test_y)):

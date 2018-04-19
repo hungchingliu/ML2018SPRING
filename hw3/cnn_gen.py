@@ -10,7 +10,10 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.layers.advanced_activations import LeakyReLU
 from keras.layers.normalization import BatchNormalization
 from keras.preprocessing.image import ImageDataGenerator
-import matplotlib.pyplot as plt
+import sys
+
+in_path = sys.argv[1]
+out_path = sys.argv[2]
 
 
 batch_size = 256
@@ -18,7 +21,7 @@ epochs = 300
 n_class = 7
 
 def load_data():
-    with open('dataset/train.csv', 'r') as csvfile:
+    with open(in_path, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter = ',')
         train_x = []
         train_y = []
@@ -108,22 +111,6 @@ def main():
 
     train_model = model.fit_generator(datagen.flow(train_x, train_label), steps_per_epoch=5*len(train_x)//batch_size, epochs=epochs, verbose=1, validation_data=(valid_x, valid_label))
 
-    model.save('model5.h5py')
-    acc = train_model.history['acc']
-    val_acc = train_model.history['val_acc']
-    loss = train_model.history['loss']
-    val_loss = train_model.history['val_loss']
-    epoch = range(len(acc))
-    plt.figure(1)
-    plt.plot(epoch, acc, 'b', label='Training acc')
-    plt.plot(epoch, val_acc, 'r', label='Validation acc')
-    plt.legend()
-    plt.savefig('fig1.png')
-
-    plt.figure(2)
-    plt.plot(epoch, loss, 'b', label='Training loss')
-    plt.plot(epoch, val_loss, 'r', label='Validation loss')
-    plt.legend()
-    plt.savefig('fig2.png')
+    model.save(out_path)
 if __name__ == '__main__':
     main()
