@@ -10,7 +10,6 @@ from keras.layers import Dot
 from keras.layers import Add
 from keras.layers import Dropout
 from keras.callbacks import EarlyStopping
-import matplotlib.pyplot as plt
 from keras.models import load_model
 """
 MF model is referred to the hands on tutorial of hw5 last semester
