@@ -3,7 +3,7 @@
 * install librosa eg. pip install librosa
 * git clone https://github.com/hungchingliu/ML2018SPRING.git  (clone final project)
 * git clone https://gitlab.com/harry1003/ml_final.git         (clone model)
-* Add 'fix.h5' in 'ml_final' to final/src/method_1/data
+* Add *'fix.h5'* in *'ml_final'* to *final/src/method_1/data*
 * bash reproduce.sh [audio_test_path]
 
 
@@ -12,8 +12,8 @@
 * python readfile.py [audio_train_path]
 
 > install matplotlib eg. pip install matplotlib
-> or open 'train.py' and delete line 14, 109, 110 
+> || open 'train.py' and delete line 14, 109, 110 
 * python train.py
-* >model will save as reproduce.h5 at same dic 
+* model will save as reproduce.h5 at same dic 
 
 
