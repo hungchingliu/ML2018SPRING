@@ -71,7 +71,7 @@ def generate_answer(audio_test_path):
             if line_n%10 == 0:
                 print('predicting line:',line_n)
             line_n = line_n+1
-                   
+                  
     predict_array = np.array(predict_array)    
     np.save('../predict/m1_predict',predict_array)  
     ##### start predict #####    

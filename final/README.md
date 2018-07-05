@@ -2,7 +2,7 @@
 * keras version >= 2.1.6
 * install librosa eg. pip install librosa
 * bash reproduce.sh [audio_test_path] [answer_path]
-
+* **it will download a model(400m) so it takes times**
 
 # How To Train Method_1
 * open src/method_1 and run 
