@@ -1,6 +1,9 @@
 # How To Reproduce
 * keras version >= 2.1.6
 * install librosa eg. pip install librosa
+* for only ensemble predict data 
+* bash ensemble.sh [audio_test_path] [answer_path]
+* else
 * bash reproduce.sh [audio_test_path] [answer_path]
 * **it will download a model(400m) so it takes times**
 
