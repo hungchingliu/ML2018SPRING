@@ -1,10 +1,7 @@
 # How To Reproduce
 * keras version >= 2.1.6
 * install librosa eg. pip install librosa
-* git clone https://github.com/hungchingliu/ML2018SPRING.git  (clone final project)
-* git clone https://gitlab.com/harry1003/ml_final.git         (clone model)
-* Add **'fix.h5'** in **'ml_final'** to **final/src/method_1/data**
-* bash reproduce.sh [audio_test_path]
+* bash reproduce.sh [audio_test_path] [answer_path]
 
 
 # How To Train Method_1
