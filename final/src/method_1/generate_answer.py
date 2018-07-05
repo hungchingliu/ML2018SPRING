@@ -20,7 +20,7 @@ n_fil = 128
 ##### const ######
 
 #### load model ####
-model = load_model('./data/fix.h5')
+model = load_model('./ml_final/fix.h5')
 #### load model ####
 
 
@@ -73,7 +73,7 @@ def generate_answer(audio_test_path):
             line_n = line_n+1
                    
     predict_array = np.array(predict_array)    
-    np.save('../m1_predict',predict_array)  
+    np.save('../predict/m1_predict',predict_array)  
     ##### start predict #####    
 
 if __name__ == '__main__':    
