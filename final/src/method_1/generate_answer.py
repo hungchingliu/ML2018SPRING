@@ -42,7 +42,7 @@ def generate_answer(audio_test_path):
             if line_n > 0  :
                 file_name = row[0]
                 y, sr = librosa.load(audio_test_path+ '/' + file_name)                
-                if len(y) == 0 or line_n == 5:                    
+                if len(y) == 0:                    
                     predict_array.extend( np.zeros( (1, 41) ) )
                 else:    
                     S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128,fmax=16000)                    
