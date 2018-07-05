@@ -10,7 +10,6 @@ import numpy as np
 import sys
 
 from keras.models import load_model
-from keras.preprocessing import text
 import librosa
 
 
@@ -32,43 +31,25 @@ model = load_model('./data/fix.h5')
 
 def generate_answer(audio_test_path):
     
-    ##### generate label #####
-    print('label generate start')
-    dic_back = []
-    all_label = np.load('./data/label_all.npy')
-    tokenizer = text.Tokenizer(filters='\n',lower=False) 
-    tokenizer.fit_on_texts(all_label)        
-    for word in tokenizer.word_index:
-        dic_back.append(word)
-       
-    ##### generate label #####
-    
     ##### start predict #####
     print('starting predicting')
-    line_n = 0
-    answer = []    
+    line_n = 0  
     predict_array = []
     
     with open('./data/sample_submission.csv') as readfile:        
-        reader = csv.reader(readfile)        
-        
-        for row in reader:
-            if line_n > 0 :
+        reader = csv.reader(readfile)    
+        for row in reader:            
+            if line_n > 0  :
                 file_name = row[0]
-                y, sr = librosa.load(audio_test_path+ '/' + file_name)
-                
-                if len(y) == 0:
-                    answer.append([])
-                    answer[-1].extend([file_name])
-                    predict_str = dic_back[0]+' '+dic_back[1]+' '+dic_back[2]
-                    answer[-1].extend([predict_str])
-                    predict_array.extend(np.zeros((41)))
+                y, sr = librosa.load(audio_test_path+ '/' + file_name)                
+                if len(y) == 0 or line_n == 5:                    
+                    predict_array.extend( np.zeros( (1, 41) ) )
                 else:    
-                    S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128,fmax=16000)
-                    
+                    S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128,fmax=16000)                    
                     sample = np.zeros((2*width,n_fil))
                     spectrogram = (librosa.power_to_db(S,ref=np.max)).T
                     max_index_r,max_index_c = np.where(spectrogram == np.max(spectrogram)) 
+                    
                     max_index_r = max_index_r[0]
                     if max_index_r >= width-1:
                         sample[0:width] = spectrogram[max_index_r-width+1:max_index_r+1]
@@ -85,18 +66,12 @@ def generate_answer(audio_test_path):
                     
                     sample = sample.reshape(1,80,128,1)
                     predict = model.predict(sample)
-                    predict_array.extend(predict)
+                    predict_array.extend( predict )
                     
-                    predict = predict[0].argsort()[-3:][::-1]     
-                    
-                    answer.append([])
-                    answer[-1].extend([file_name])
-                    predict_str = dic_back[predict[0]]+' '+dic_back[predict[1]]+' '+dic_back[predict[2]]
-                    answer[-1].extend([predict_str])
-                if line_n%10 == 0:
-                    print('predicting line:',line_n)
-            line_n = line_n + 1
-            
+            if line_n%10 == 0:
+                print('predicting line:',line_n)
+            line_n = line_n+1
+                   
     predict_array = np.array(predict_array)    
     np.save('../m1_predict',predict_array)  
     ##### start predict #####    
