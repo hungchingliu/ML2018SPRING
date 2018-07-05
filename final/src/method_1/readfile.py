@@ -24,7 +24,7 @@ freq_dim = 1000
 ##### to run this function, you need to input 'audio_train_path'   #####
 ##### and make sure you have 'train.csv' in './data'               #####
 ##### this function will generate 'label_v.npy','train_data.npy'   #####
-##### in same dic                                                  #####                  
+##### in temp dic                                                  #####                  
 
 
 
